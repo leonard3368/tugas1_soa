@@ -4,6 +4,10 @@ const port = 3000;
 
 const w2Database = require('./databases/connection')
 
+const userRouter = require('./routes/user')
+const loginRouter = require('./routes/login')
+const friendRouter = require('./routes/friend')
+
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
 
@@ -23,4 +27,6 @@ const initApp = async () => {
 
  initApp()
 
- 
+app.use("/api/user/", userRouter)
+app.use("/api/login/", loginRouter)
+app.use("/api/friend/", friendRouter)
