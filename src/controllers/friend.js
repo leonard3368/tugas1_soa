@@ -72,5 +72,29 @@ module.exports ={
     return res.send({
       ...result
     })
+  },
+  deleteFriend: async (req, res)=>{
+    let {username, password, usercari} = req.body
+    let person = await User.findOne({
+      where: {
+        username: username
+      }
+    })
+    let friend = await User.findOne({
+      where: {
+        username: usercari
+      }
+    })
+    let person_id = person.id
+    let friend_id = friend.id
+    await Friend.destroy({
+      where: {
+        person_id: person_id,
+        friend_id: friend_id
+      }
+    })
+    return res.send({
+      message: "berhasil delete"
+    })
   }
 }
